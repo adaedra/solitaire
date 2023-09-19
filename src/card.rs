@@ -93,7 +93,7 @@ impl fmt::Display for PlacedCard {
 
 #[cfg(test)]
 mod tests {
-    use super::{Card, Suit, Placement};
+    use super::{Card, Placement, Suit};
 
     #[test]
     fn test_placeable_on_valid() {
