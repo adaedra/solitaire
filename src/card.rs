@@ -97,21 +97,21 @@ mod tests {
 
     #[test]
     fn test_placeable_on_valid() {
-        assert!(Card(1, Suit::Hearts).placeable_on(&Card(0, Suit::Spades), Placement::GamePile));
+        assert!(Card(1, Suit::Hearts).placeable_on(&Card(2, Suit::Spades), Placement::GamePile));
     }
 
     #[test]
     fn test_placeable_on_same_suit() {
-        assert!(!Card(1, Suit::Hearts).placeable_on(&Card(0, Suit::Hearts), Placement::GamePile));
+        assert!(!Card(1, Suit::Hearts).placeable_on(&Card(2, Suit::Hearts), Placement::GamePile));
     }
 
     #[test]
     fn test_placeable_on_same_color() {
-        assert!(!Card(1, Suit::Hearts).placeable_on(&Card(0, Suit::Diamonds), Placement::GamePile));
+        assert!(!Card(1, Suit::Hearts).placeable_on(&Card(2, Suit::Diamonds), Placement::GamePile));
     }
 
     #[test]
     fn test_placeable_on_wrong_value() {
-        assert!(!Card(1, Suit::Hearts).placeable_on(&Card(2, Suit::Spades), Placement::GamePile));
+        assert!(!Card(1, Suit::Hearts).placeable_on(&Card(4, Suit::Spades), Placement::GamePile));
     }
 }
