@@ -76,21 +76,6 @@ pub struct PlacedCard {
     pub visible: bool,
 }
 
-impl fmt::Display for PlacedCard {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        if self.visible {
-            write!(f, "{}", self.card)
-        } else {
-            write!(
-                f,
-                "{} XX {}",
-                color::Fg(color::LightBlack),
-                color::Fg(color::Reset)
-            )
-        }
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::{Card, Placement, Suit};
