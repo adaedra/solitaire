@@ -136,6 +136,13 @@ fn main() {
                     }
                 }
                 Key::Char('r') => game.redraw(&mut stdout),
+                Key::Char('n') => {
+                    game = Game::new();
+                    game.redraw(&mut stdout);
+
+                    cur = Position::Deck;
+                    sel = None;
+                }
                 _ => (),
             }
         } else {
