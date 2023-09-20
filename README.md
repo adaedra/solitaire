@@ -8,6 +8,6 @@ A small, terminal based game of Solitaire written in [Rust](https://www.rust-lan
 
 Space and Return keys select/release cards, or distribute from the deck.  
 Arrow keys move between the piles and within them.  
-Q and Escape keys quit the game.
-N starts a new game.
+Q and Escape keys quit the game.  
+N starts a new game.  
 D and Delete quickly move a card to one of the top pile, if possible.
