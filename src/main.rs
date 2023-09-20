@@ -1,6 +1,7 @@
 mod card;
 mod game;
 
+use crate::card::Placement;
 use crate::game::Game;
 use std::io::{self, Write};
 use termion::{color, cursor::Goto, event::Key, input::TermRead, raw::IntoRawMode};
@@ -142,6 +143,30 @@ fn main() {
 
                     cur = Position::Deck;
                     sel = None;
+                }
+                Key::Char('d') | Key::Delete if sel.is_none() && !matches!(cur, Position::Deck) => {
+                    if game.card_at(&cur).is_some() {
+                        if !matches!(cur, Position::GamePile(_, i) if i > 0) {
+                            let is_ace = game.card_at(&cur).unwrap().0 == 0;
+                            for i in 0..4 {
+                                let empty = game.end_piles[i as usize].is_empty();
+                                if empty && is_ace {
+                                    game.move_cards(&mut stdout, &cur, &Position::EndPile(i as u8));
+                                    game.print_pile(&mut stdout, &Position::EndPile(i as u8), true, Style::Normal);
+                                    break;
+                                } else if !empty
+                                    && game.card_at(&cur).unwrap().placeable_on(
+                                        game.end_piles[i as usize].last().unwrap(),
+                                        Placement::EndPile,
+                                    )
+                                {
+                                    game.move_cards(&mut stdout, &cur, &Position::EndPile(i as u8));
+                                    game.print_pile(&mut stdout, &Position::EndPile(i as u8), true, Style::Normal);
+                                    break;
+                                }
+                            }
+                        }
+                    }
                 }
                 _ => (),
             }
